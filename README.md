@@ -1,2 +1,2 @@
 # Rescue
-My second platformer game
+My First game
