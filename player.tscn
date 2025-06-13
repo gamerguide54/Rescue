@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://player_spriteframes.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://player.gd" type="Script" id=2]
+[ext_resource path="res://Assets/guns/sGun.png" type="Texture" id=3]
+[ext_resource path="res://gun.gd" type="Script" id=4]
+[ext_resource path="res://Assets/soungs/jump1.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/fonts/AGENCYB.TTF" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 6 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 16.0
+
+[node name="player" type="KinematicBody2D"]
+collision_mask = 18
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = -10.0
+margin_top = -42.0
+margin_right = 30.0
+margin_bottom = -22.0
+custom_fonts/font = SubResource( 2 )
+text = "100"
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )
+
+[node name="gun" type="Sprite" parent="."]
+position = Vector2( 8, 12 )
+texture = ExtResource( 3 )
+offset = Vector2( 4, -1 )
+script = ExtResource( 4 )
+
+[node name="gunpos" type="Position2D" parent="gun"]
+position = Vector2( 18, -1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="soungjump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -18.159
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

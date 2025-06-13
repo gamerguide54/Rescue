@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/UI_Hover.ogg-9ebb4911ad9de53a9d936a668d4548e1.oggstr"
+
+[deps]
+
+source_file="res://Assets/soungs/UI_Hover.ogg"
+dest_files=[ "res://.import/UI_Hover.ogg-9ebb4911ad9de53a9d936a668d4548e1.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
