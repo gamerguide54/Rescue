@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://tileset_one_way.tres" type="TileSet" id=2]
@@ -12,9 +12,10 @@
 [ext_resource path="res://World.gd" type="Script" id=10]
 [ext_resource path="res://Assets/background/set2_tiles.png" type="Texture" id=11]
 [ext_resource path="res://Assets/soungs/in game song.wav" type="AudioStream" id=12]
-[ext_resource path="res://opjects/drop_floor.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Assets/fonts/Admire Gustavo.otf" type="DynamicFontData" id=13]
 [ext_resource path="res://Assets/Bin/grey_button13.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Bin/stop button.png" type="Texture" id=15]
+[ext_resource path="res://opjects/moving Platform.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 352, 32.5 )
@@ -55,6 +56,10 @@ font_data = ExtResource( 7 )
 [sub_resource type="DynamicFont" id=10]
 size = 23
 font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 20
+font_data = ExtResource( 13 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 10 )
@@ -283,20 +288,15 @@ autostart = true
 
 [node name="text" type="Node2D" parent="."]
 
-[node name="Drop_floors" type="Node" parent="."]
+[node name="Label" type="Label" parent="text"]
+margin_left = 2616.0
+margin_top = 240.0
+margin_right = 2709.0
+margin_bottom = 264.0
+custom_fonts/font = SubResource( 15 )
+text = "moving Platform"
 
-[node name="Sprite" parent="Drop_floors" instance=ExtResource( 13 )]
-position = Vector2( 2467, 611 )
-collision_mask = 0
-
-[node name="Sprite2" parent="Drop_floors" instance=ExtResource( 13 )]
-position = Vector2( 2659, 611 )
-
-[node name="Sprite3" parent="Drop_floors" instance=ExtResource( 13 )]
-position = Vector2( 2851, 611 )
-
-[node name="Sprite4" parent="Drop_floors" instance=ExtResource( 13 )]
-position = Vector2( 3043, 611 )
+[node name="moving Platform" parent="." instance=ExtResource( 16 )]
 
 [connection signal="time" from="." to="HUD" method="_on_World_time"]
 [connection signal="body_entered" from="fallzone" to="player" method="_on_fallzone_body_entered"]
