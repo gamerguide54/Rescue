@@ -1,2 +1,2 @@
 # Rescue
-My First game
+Demo
