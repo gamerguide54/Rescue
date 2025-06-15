@@ -14,3 +14,7 @@ func _physics_process(delta):
 
 func _on_Timer_timeout():
 	emit_signal("time")
+
+
+func _on_side_hit_s_player_entered(body):
+	print("side hit")
