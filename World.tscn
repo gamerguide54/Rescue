@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://tileset_one_way.tres" type="TileSet" id=2]
@@ -12,11 +12,14 @@
 [ext_resource path="res://World.gd" type="Script" id=10]
 [ext_resource path="res://Assets/background/set2_tiles.png" type="Texture" id=11]
 [ext_resource path="res://Assets/soungs/in game song.wav" type="AudioStream" id=12]
-[ext_resource path="res://Assets/fonts/Admire Gustavo.otf" type="DynamicFontData" id=13]
 [ext_resource path="res://Assets/Bin/grey_button13.png" type="Texture" id=14]
 [ext_resource path="res://Assets/Bin/stop button.png" type="Texture" id=15]
 [ext_resource path="res://Assets/Bin/metalMid.png" type="Texture" id=16]
 [ext_resource path="res://opjects/Spikes.png" type="Texture" id=17]
+[ext_resource path="res://Scripts/side hit.gd" type="Script" id=18]
+
+[sub_resource type="SegmentShape2D" id=22]
+b = Vector2( 0, 52 )
 
 [sub_resource type="RectangleShape2D" id=16]
 extents = Vector2( 105, 35 )
@@ -24,7 +27,7 @@ extents = Vector2( 105, 35 )
 [sub_resource type="Animation" id=17]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("KinematicBody2D:position")
+tracks/0/path = NodePath("side to side:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -41,7 +44,7 @@ resource_name = "move"
 length = 6.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("KinematicBody2D:position")
+tracks/0/path = NodePath("side to side:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -91,10 +94,13 @@ tracks/0/keys = {
 extents = Vector2( 352, 32.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 928, 23.5 )
+extents = Vector2( 446.5, 23.5 )
 
 [sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 1913, 40.5 )
+
+[sub_resource type="RectangleShape2D" id=23]
+extents = Vector2( 444.75, 10 )
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.501961, 0.796078, 0.733333, 0.223529 )
@@ -127,93 +133,99 @@ font_data = ExtResource( 7 )
 size = 23
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=15]
-size = 20
-font_data = ExtResource( 13 )
-
 [node name="World" type="Node2D"]
 script = ExtResource( 10 )
 
-[node name="movin" type="Node2D" parent="."]
+[node name="moving" type="Node2D" parent="."]
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="movin"]
+[node name="side hit art" type="Area2D" parent="moving"]
+position = Vector2( 3346, 523 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="moving/side hit art"]
+shape = SubResource( 22 )
+
+[node name="side to side" type="KinematicBody2D" parent="moving"]
 position = Vector2( 419, 350 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite3" type="Sprite" parent="movin/KinematicBody2D"]
+[node name="Sprite3" type="Sprite" parent="moving/side to side"]
 texture = ExtResource( 16 )
 
-[node name="Sprite" type="Sprite" parent="movin/KinematicBody2D"]
+[node name="Sprite" type="Sprite" parent="moving/side to side"]
 position = Vector2( 70, 0 )
 texture = ExtResource( 16 )
 
-[node name="Sprite2" type="Sprite" parent="movin/KinematicBody2D"]
+[node name="Sprite2" type="Sprite" parent="moving/side to side"]
 position = Vector2( 140, 0 )
 texture = ExtResource( 16 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="movin/KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="moving/side to side"]
 position = Vector2( 70, 0 )
 shape = SubResource( 16 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="movin/KinematicBody2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="moving/side to side"]
 root_node = NodePath("../..")
 autoplay = "move"
 anims/RESET = SubResource( 17 )
 anims/move = SubResource( 18 )
 
-[node name="KinematicBody2D2" type="KinematicBody2D" parent="movin"]
+[node name="side hit" type="KinematicBody2D" parent="moving"]
 position = Vector2( 3617, 420 )
+script = ExtResource( 18 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite" type="Sprite" parent="moving/side hit"]
 position = Vector2( 1, -1 )
 texture = ExtResource( 16 )
 
-[node name="Sprite2" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite2" type="Sprite" parent="moving/side hit"]
 position = Vector2( 1, 58 )
 texture = ExtResource( 16 )
 
-[node name="Sprite3" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite3" type="Sprite" parent="moving/side hit"]
 position = Vector2( 1, 121 )
 texture = ExtResource( 16 )
 
-[node name="Sprite4" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite4" type="Sprite" parent="moving/side hit"]
 position = Vector2( 71, 121 )
 texture = ExtResource( 16 )
 
-[node name="Sprite5" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite5" type="Sprite" parent="moving/side hit"]
 position = Vector2( 71, 58 )
 texture = ExtResource( 16 )
 
-[node name="Sprite6" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite6" type="Sprite" parent="moving/side hit"]
 position = Vector2( 71, -1 )
 texture = ExtResource( 16 )
 
-[node name="Sprite7" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite7" type="Sprite" parent="moving/side hit"]
 position = Vector2( 141, 62 )
 texture = ExtResource( 16 )
 
-[node name="Sprite8" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite8" type="Sprite" parent="moving/side hit"]
 position = Vector2( 211, 62 )
 texture = ExtResource( 16 )
 
-[node name="Sprite9" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite9" type="Sprite" parent="moving/side hit"]
 position = Vector2( 281, 62 )
 texture = ExtResource( 16 )
 
-[node name="Sprite10" type="Sprite" parent="movin/KinematicBody2D2"]
+[node name="Sprite10" type="Sprite" parent="moving/side hit"]
 position = Vector2( 351, 62 )
 texture = ExtResource( 16 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="movin/KinematicBody2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="moving/side hit"]
 position = Vector2( 36, 60 )
 shape = SubResource( 19 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="movin/KinematicBody2D2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="moving/side hit"]
 anims/RESET = SubResource( 20 )
 anims/move = SubResource( 21 )
 
@@ -286,17 +298,70 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="leve items" type="Node2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="xs" type="Node2D" parent="leve items"]
+
+[node name="Sprite" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2352, 1048 )
+texture = ExtResource( 17 )
+
+[node name="Sprite2" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2440, 1002 )
+texture = ExtResource( 17 )
+
+[node name="Sprite3" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2528, 1048 )
+texture = ExtResource( 17 )
+
+[node name="Sprite4" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2616, 1001 )
+texture = ExtResource( 17 )
+
+[node name="Sprite5" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2705, 1048 )
+texture = ExtResource( 17 )
+
+[node name="Sprite6" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2795, 1000 )
+texture = ExtResource( 17 )
+
+[node name="Sprite7" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2884, 1047 )
+texture = ExtResource( 17 )
+
+[node name="Sprite8" type="Sprite" parent="leve items/xs"]
+position = Vector2( 2974, 999 )
+texture = ExtResource( 17 )
+
+[node name="Sprite9" type="Sprite" parent="leve items/xs"]
+position = Vector2( 3064, 1045 )
+texture = ExtResource( 17 )
+
+[node name="Sprite10" type="Sprite" parent="leve items/xs"]
+position = Vector2( 3158, 998 )
+texture = ExtResource( 17 )
+
 [node name="fallzone" type="Area2D" parent="."]
 position = Vector2( 315, 924 )
 collision_layer = 4
 
 [node name="1" type="CollisionShape2D" parent="fallzone"]
-position = Vector2( 1957, 89 )
+position = Vector2( 1475.5, 89 )
 shape = SubResource( 3 )
 
 [node name="2" type="CollisionShape2D" parent="fallzone"]
 position = Vector2( 8512, 221 )
 shape = SubResource( 14 )
+
+[node name="3" type="CollisionShape2D" parent="fallzone"]
+position = Vector2( 2437.25, 76 )
+shape = SubResource( 23 )
+
+[node name="4" type="CollisionShape2D" parent="fallzone"]
+position = Vector2( 2437.25, 32 )
+shape = SubResource( 23 )
 
 [node name="life" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -426,7 +491,7 @@ speed = 90
 detects_cliffs = true
 
 [node name="enemy2" parent="enemys" instance=ExtResource( 9 )]
-position = Vector2( 707, 548 )
+position = Vector2( 835, 548 )
 speed = 90
 direction = -1
 detects_cliffs = true
@@ -441,60 +506,8 @@ autostart = true
 
 [node name="text" type="Node2D" parent="."]
 
-[node name="Label" type="Label" parent="text"]
-margin_left = 2760.0
-margin_top = 912.0
-margin_right = 2853.0
-margin_bottom = 936.0
-custom_fonts/font = SubResource( 15 )
-text = "hot let done"
-
-[node name="leve items" type="Node2D" parent="."]
-position = Vector2( 0, -1 )
-
-[node name="side to side" type="Node2D" parent="leve items"]
-
-[node name="Sprite" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2352, 1048 )
-texture = ExtResource( 17 )
-
-[node name="Sprite2" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2440, 1002 )
-texture = ExtResource( 17 )
-
-[node name="Sprite3" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2528, 1048 )
-texture = ExtResource( 17 )
-
-[node name="Sprite4" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2616, 1001 )
-texture = ExtResource( 17 )
-
-[node name="Sprite5" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2705, 1048 )
-texture = ExtResource( 17 )
-
-[node name="Sprite6" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2795, 1000 )
-texture = ExtResource( 17 )
-
-[node name="Sprite7" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2884, 1035 )
-texture = ExtResource( 17 )
-
-[node name="Sprite8" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 2974, 999 )
-texture = ExtResource( 17 )
-
-[node name="Sprite9" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 3064, 1035 )
-texture = ExtResource( 17 )
-
-[node name="Sprite10" type="Sprite" parent="leve items/side to side"]
-position = Vector2( 3158, 998 )
-texture = ExtResource( 17 )
-
 [connection signal="time" from="." to="HUD" method="_on_World_time"]
+[connection signal="body_entered" from="moving/side hit art" to="moving/side hit" method="player_entered"]
 [connection signal="body_entered" from="fallzone" to="player" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="life" to="player" method="_on_life_body_entered"]
 [connection signal="coin_collected" from="coins/coin" to="HUD" method="_on_coin_collected"]
