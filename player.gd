@@ -19,8 +19,9 @@ const bullet = preload("res://bullet.tscn")
 
 
 func _physics_process(delta):
-	#print(state)
 	
+		
+
 	match state:
 		States.AIR:
 			if is_on_floor():
@@ -84,9 +85,17 @@ func _physics_process(delta):
 			move_and_fall()
 			#print($gun/gunpos.position)
 			$Label.text = String(heath)
-			#when the player gets to low
+			#when the player life gets to to 0
 			if heath == 0:
-				print("ok it work") 
+				$Sprite.play("dead")
+				set_collision_layer_bit(0, false)
+				set_collision_mask_bit(4, false)
+				Input.action_release("left")
+				Input.action_release("right")
+
+				
+				
+				
 			
 			#if heath < 1:
 			#	dead()
@@ -102,20 +111,26 @@ func _physics_process(delta):
 func move_and_fall():
 	velocity.y = velocity.y + gravity
 	velocity = move_and_slide(velocity,Vector2.UP)
+
+	
 	
 	
 #revice from enemy with position
 func bounce():
 	print("bounce")
 	velocity.y = -jump * 0.7
-	heath = heath -10
+	heath = heath -20
 	set_modulate(Color(10,10,10,0.9))
 	hurt = 20
 	$Timer.start()
+	#when the player life gets to to 0. call a func
+	if heath == 0:
+		Dead()
+
 	
 	
 func hit_side(var enemypos):
-	heath = heath -25
+	heath = heath -20
 	if position.x < enemypos:
 		velocity.x = -800
 	elif position.x > enemypos:
@@ -125,13 +140,16 @@ func hit_side(var enemypos):
 	set_modulate(Color(10,10,10,0.9))
 	hurt = 20
 	$Timer.start()
+	#when the player life gets to to 0. call a func
+	if heath == 0:
+		Dead()
 	
 	
 	
 	
 func dead():
 	print("dead")
-	$Sprite.play("dead")
+	#$Sprite.play("dead")
 
 	
 
@@ -165,8 +183,9 @@ func _on_fallzone_body_entered(body):
 
 
 
-
-
+#func
+func Dead():
+	$player_dead_timeout.start()
 
 
 
@@ -207,3 +226,10 @@ func _on_Timer_timeout():
 
 func _on_life_body_entered(body):
 	heath = heath +19
+
+
+func player_dead_timeout_timeout():
+	$CollisionShape2D.disabled = true
+	#get_tree().change_scene("res://World.tscn")
+
+
