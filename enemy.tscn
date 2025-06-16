@@ -254,7 +254,7 @@ detects_cliffs = false
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 14 )
 animation = "walk"
-playing = true
+frame = 9
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
