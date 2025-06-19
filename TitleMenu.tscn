@@ -61,12 +61,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -375.0
+margin_left = -236.0
 margin_top = -294.5
-margin_right = 375.0
+margin_right = 514.0
 margin_bottom = -135.5
 custom_fonts/font = SubResource( 1 )
-text = "The Rescuer"
+text = "Rescuer"
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
