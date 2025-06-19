@@ -7,8 +7,11 @@ var heath = 100
 
 signal enemy_kill_number
 
+onready var ray_cast_2d: RayCast2D = $RayCast2D
+
 
 func _ready():
+
 	if direction == -1:
 		$AnimatedSprite.flip_h = false
 	$flooer_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
@@ -19,6 +22,8 @@ func _physics_process(delta):
 	velocity.y += 20
 	if is_on_wall() or not $flooer_checker.is_colliding() and detects_cliffs and is_on_floor():
 		direction = direction * -1
+	
+	
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		$flooer_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 	
@@ -28,6 +33,8 @@ func _physics_process(delta):
 	if heath < 0:
 		pass
 		#emit_signal("enemy_kill_number")
+	
+	print(ray_cast_2d.is_colliding())
 		
 
 

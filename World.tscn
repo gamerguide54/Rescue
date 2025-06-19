@@ -531,24 +531,8 @@ stream = ExtResource( 19 )
 
 [node name="enemys" type="Node2D" parent="."]
 
-[node name="enemy" parent="enemys" instance=ExtResource( 9 )]
-position = Vector2( 1281, 548 )
-speed = 90
-detects_cliffs = true
-
 [node name="enemy2" parent="enemys" instance=ExtResource( 9 )]
 position = Vector2( 835, 548 )
-speed = 90
-direction = -1
-detects_cliffs = true
-
-[node name="enemy4" parent="enemys" instance=ExtResource( 9 )]
-position = Vector2( 258, 548 )
-speed = 90
-detects_cliffs = true
-
-[node name="enemy3" parent="enemys" instance=ExtResource( 9 )]
-position = Vector2( 715, 36 )
 speed = 90
 direction = -1
 detects_cliffs = true
@@ -588,8 +572,5 @@ position = Vector2( 7174, 33.0001 )
 [connection signal="coin_collected" from="coins/coin17" to="HUD" method="_on_coin_collected"]
 [connection signal="coin_collected" from="coins/coin18" to="HUD" method="_on_coin_collected"]
 [connection signal="pressed" from="HUD/stop" to="HUD" method="_on_stop_pressed"]
-[connection signal="enemy_kill_number" from="enemys/enemy" to="HUD" method="_on_enemy_kill_number"]
 [connection signal="enemy_kill_number" from="enemys/enemy2" to="HUD" method="_on_enemy_kill_number"]
-[connection signal="enemy_kill_number" from="enemys/enemy4" to="HUD" method="_on_enemy_kill_number"]
-[connection signal="enemy_kill_number" from="enemys/enemy3" to="HUD" method="_on_enemy_kill_number"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

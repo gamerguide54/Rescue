@@ -91,11 +91,12 @@ func _physics_process(delta):
 				pass
 
 			if heath < 0:
-				print("low")
+				#print("low")
 				get_tree().change_scene("res://World.tscn")
 
 			elif heath > 90:
-				print("hight")
+				pass
+				#print("hight")
 			
 
 
