@@ -13,6 +13,7 @@ func _ready():
 
 
 func _on_coin_collected():
+	$soungs.play()
 	coins = coins + 1
 	_ready()
 	

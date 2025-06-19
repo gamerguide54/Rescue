@@ -85,25 +85,17 @@ func _physics_process(delta):
 			move_and_fall()
 			#print($gun/gunpos.position)
 			$Label.text = String(heath)
+			#when the player life gets to to 0. call a func
 			#when the player life gets to to 0
-			if heath == 0:
-				$Sprite.play("dead")
-				set_collision_layer_bit(0, false)
-				set_collision_mask_bit(4, false)
-				Input.action_release("left")
-				Input.action_release("right")
+			if heath == 80:
+				pass
 
-				
-				
-				
-			
-			#if heath < 1:
-			#	dead()
-				#$Timer0.start()
-				#$Sprite.play("dead")
-				
-			#elif heath > 100:
-			#	print("hight")
+			if heath < 0:
+				print("low")
+				get_tree().change_scene("res://World.tscn")
+
+			elif heath > 90:
+				print("hight")
 			
 
 
@@ -125,7 +117,8 @@ func bounce():
 	$Timer.start()
 	#when the player life gets to to 0. call a func
 	if heath == 0:
-		Dead()
+		pass
+
 
 	
 	
@@ -140,19 +133,7 @@ func hit_side(var enemypos):
 	set_modulate(Color(10,10,10,0.9))
 	hurt = 20
 	$Timer.start()
-	#when the player life gets to to 0. call a func
-	if heath == 0:
-		Dead()
-	
-	
-	
-	
-func dead():
-	print("dead")
-	#$Sprite.play("dead")
-
-	
-
+	print("side hit")
 
 
 func _on_fallzone_body_entered(body):
@@ -161,55 +142,12 @@ func _on_fallzone_body_entered(body):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#func
-func Dead():
-	$player_dead_timeout.start()
-
-
-
-	
-	
-#func side_hit(var enemyposx): 
-	#(var enmyposx) get the enemy position 
-#	print("player got hit")                   
-#	if position.x < enemyposx:
-#		velocity.x = -800
-		
-#	elif position.x > enemyposx:
-#		velocity.x = 800
-	
-
-	
 #old code dont kmow if this needed
 #add one to the coins var
 func add_coin():
 	coins = coins + 1
 	#print out info to the commline
 	print(coins)
-	
-	
 	
 	
 
@@ -225,11 +163,8 @@ func _on_Timer_timeout():
 
 
 func _on_life_body_entered(body):
-	heath = heath +19
+	heath = heath +20
 
 
-func player_dead_timeout_timeout():
-	$CollisionShape2D.disabled = true
-	#get_tree().change_scene("res://World.tscn")
 
 

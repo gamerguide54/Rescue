@@ -62,17 +62,19 @@ func _on_top_checher_body_entered(body):
 
 #func
 func dead():
+	print("enemy dead")
 	emit_signal("enemy_kill_number")
-	$AnimatedSprite.play("dead")
-	speed = 0
-	set_collision_layer_bit(4, false)
-	set_collision_mask_bit(0, false)
-	$top_checher.set_collision_layer_bit(4, false)
-	$top_checher.set_collision_mask_bit(0, false)
-	$side_checker.set_collision_layer_bit(4, false)
-	$side_checker.set_collision_mask_bit(0, false)
-	$side_checker.set_collision_mask_bit(7, false)
-	$Timer1.start()
+	queue_free()
+	#$AnimatedSprite.play("dead")
+	#speed = 0
+	#set_collision_layer_bit(4, false)
+	#set_collision_mask_bit(0, false)
+	#$top_checher.set_collision_layer_bit(4, false)
+	#$top_checher.set_collision_mask_bit(0, false)
+	#$side_checker.set_collision_layer_bit(4, false)
+	#$side_checker.set_collision_mask_bit(0, false)
+	#$side_checker.set_collision_mask_bit(7, false)
+	#$Timer1.start()
 	
 
 	
@@ -86,5 +88,5 @@ func _on_Timer0_timeout():
 	queue_free()
 
 
-func _on_Timer1_timeout():
-	queue_free()
+#func _on_Timer1_timeout():
+#	queue_free()
