@@ -297,10 +297,10 @@ text = "50"
 wait_time = 0.5
 one_shot = true
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="player_checker" type="RayCast2D" parent="."]
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( -4.54598e-06, 104 )
+cast_to = Vector2( 0, 350 )
 
 [connection signal="body_entered" from="top_checher" to="." method="_on_top_checher_body_entered"]
 [connection signal="body_entered" from="side_checker" to="." method="_on_side_checker_body_entered"]

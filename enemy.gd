@@ -4,26 +4,29 @@ export var speed = 50
 export var direction = 1
 export var detects_cliffs = true
 var heath = 100
-
 signal enemy_kill_number
 
-onready var ray_cast_2d: RayCast2D = $RayCast2D
+onready var ray_cast_2d: RayCast2D = $player_checker
 
 
 func _ready():
-
 	if direction == -1:
 		$AnimatedSprite.flip_h = false
 	$flooer_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 	$flooer_checker.enabled = detects_cliffs
 	
 	
+	
+	
+	
+	
+	
+	
 func _physics_process(delta):
 	velocity.y += 20
 	if is_on_wall() or not $flooer_checker.is_colliding() and detects_cliffs and is_on_floor():
 		direction = direction * -1
-	
-	
+		
 		$AnimatedSprite.flip_h = not $AnimatedSprite.flip_h
 		$flooer_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 	
@@ -33,22 +36,32 @@ func _physics_process(delta):
 	if heath < 0:
 		pass
 		#emit_signal("enemy_kill_number")
-	
-	print(ray_cast_2d.is_colliding())
 		
+		
+		
+		
+	#switch the raycast position
+	if direction == -1:
+		$player_checker.rotation_degrees = 90
+		
+	elif direction == 1:
+		$player_checker.rotation_degrees = -90 
+		
+	print(ray_cast_2d.is_colliding())
 
 
+		
+	
 
-
-
-
-
+		
 
 
 
 
 func _on_side_checker_body_entered(body):
 	body.hit_side(position.x)   #spend to player with position
+	#yield(get_tree().create_timer(2), "timeout") #wait for a sec
+	print("timer works")
 	heath = heath -10
 	if heath < 1:
 		dead() #call a func
@@ -72,25 +85,8 @@ func dead():
 	print("enemy dead")
 	emit_signal("enemy_kill_number")
 	queue_free()
-	#$AnimatedSprite.play("dead")
-	#speed = 0
-	#set_collision_layer_bit(4, false)
-	#set_collision_mask_bit(0, false)
-	#$top_checher.set_collision_layer_bit(4, false)
-	#$top_checher.set_collision_mask_bit(0, false)
-	#$side_checker.set_collision_layer_bit(4, false)
-	#$side_checker.set_collision_mask_bit(0, false)
-	#$side_checker.set_collision_mask_bit(7, false)
-	#$Timer1.start()
-	
 
 	
-
-
-
-
-
-
 func _on_Timer0_timeout():
 	queue_free()
 
