@@ -112,7 +112,7 @@ func move_and_fall():
 func bounce():
 	print("bounce")
 	velocity.y = -jump * 0.7
-	heath = heath -20
+	heath = heath -30
 	set_modulate(Color(10,10,10,0.9))
 	hurt = 20
 	$Timer.start()
@@ -124,7 +124,7 @@ func bounce():
 	
 	
 func hit_side(var enemypos):
-	heath = heath -20
+	heath = heath -80
 	if position.x < enemypos:
 		velocity.x = -800
 	elif position.x > enemypos:

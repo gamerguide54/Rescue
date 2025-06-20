@@ -245,16 +245,13 @@ extents = Vector2( 26, 16.5 )
 collision_layer = 16
 collision_mask = 3
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true
-}
 detects_cliffs = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 14 )
 animation = "walk"
-frame = 9
+playing = true
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -286,11 +283,18 @@ shape = SubResource( 68 )
 wait_time = 0.5
 one_shot = true
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_left = -25.0
+margin_top = -48.0
+margin_right = 25.0
+margin_bottom = -34.0
+percent_visible = false
+
 [node name="Label" type="Label" parent="."]
-margin_left = -13.0
-margin_top = -43.0
-margin_right = 27.0
-margin_bottom = -29.0
+margin_left = -8.0
+margin_top = -63.0
+margin_right = 32.0
+margin_bottom = -49.0
 text = "50"
 
 [node name="Timer1" type="Timer" parent="."]
@@ -300,7 +304,7 @@ one_shot = true
 [node name="player_checker" type="RayCast2D" parent="."]
 rotation = -1.5708
 enabled = true
-cast_to = Vector2( 0, 350 )
+cast_to = Vector2( 0, 250 )
 
 [connection signal="body_entered" from="top_checher" to="." method="_on_top_checher_body_entered"]
 [connection signal="body_entered" from="side_checker" to="." method="_on_side_checker_body_entered"]
