@@ -4,6 +4,9 @@ export var speed = 50
 export var direction = 1
 export var detects_cliffs = true
 var heath = 100
+#test
+var see = false
+
 signal enemy_kill_number
 
 #test code
@@ -39,42 +42,38 @@ func _physics_process(delta):
 	if heath < 0:
 		pass
 		#emit_signal("enemy_kill_number")
-		
-		
-		
-		
-	#switch the raycast position
+
+
+
+
+	#switch the area2D  position
 	if direction == -1:
-		$player_checker.rotation_degrees = 90
+		$Area2D/CollisionShape2D.position.x = -215
+		#$player_checker.rotation_degrees = 90
 		
 	elif direction == 1:
-		$player_checker.rotation_degrees = -90 
-		
-		
-		
+		$Area2D/CollisionShape2D.position.x = 215
+		#$player_checker.rotation_degrees = -90 
+
+
 	#test codes	
 	if ray_cast_2d.is_colliding() == false:
-		print("player not see")
+		pass
 	elif ray_cast_2d.is_colliding() == true:
-		print("see player")
-	
-	
-	if Input.is_action_just_pressed("test"):
-		var f = bullet.instance()
-		.add_child(f)
-		
+		pass
+
+
+
+
 	#set the progressbar to the heath
 	$ProgressBar.value = heath
-		
-		
-		
 
 
 
-		
-	
 
-		
+
+
+
 
 
 
@@ -116,3 +115,18 @@ func _on_Timer0_timeout():
 
 #func _on_Timer1_timeout():
 #	queue_free()
+
+
+#func
+func send_bullet():
+	var di = -1 if not $AnimatedSprite.flip_h  else 1
+	var f = bullet.instance()
+	f.direction = di
+	get_parent().add_child(f)
+	f.position.y = position.y 
+	f.position.x = position.x
+	
+	
+
+func _on_Area2D_body_entered(body):
+	send_bullet()
