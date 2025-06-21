@@ -85,7 +85,6 @@ func _physics_process(delta):
 			move_and_fall()
 			#print($gun/gunpos.position)
 			$Label.text = String(heath)
-			#when the player life gets to to 0. call a func
 			#when the player life gets to to 0
 			if heath == 80:
 				pass
@@ -105,9 +104,9 @@ func move_and_fall():
 	velocity.y = velocity.y + gravity
 	velocity = move_and_slide(velocity,Vector2.UP)
 
-	
-	
-	
+
+
+
 #revice from enemy with position
 func bounce():
 	print("bounce")
@@ -121,8 +120,8 @@ func bounce():
 		pass
 
 
-	
-	
+
+
 func hit_side(var enemypos):
 	heath = heath -80
 	if position.x < enemypos:
@@ -168,4 +167,11 @@ func _on_life_body_entered(body):
 
 
 
+
+	
+
+
+func _on_player_side_hit_body_entered(body):
+	print("enter")
+	#body.enemybullethit()
 

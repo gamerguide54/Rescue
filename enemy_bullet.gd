@@ -6,8 +6,12 @@ var direction = -1
 
 func _ready():
 	velocity.x = speed * direction
-	
 
+#func enemybullethit():
+#	queue_free()
+	
+#func hit_side():
+#	pass
 
 
 func _physics_process(delta):

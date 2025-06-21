@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://player_spriteframes.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://player.gd" type="Script" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://gun.gd" type="Script" id=4]
 [ext_resource path="res://Assets/soungs/jump1.ogg" type="AudioStream" id=5]
 [ext_resource path="res://Assets/fonts/AGENCYB.TTF" type="DynamicFontData" id=6]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 18, 18 )
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 6 )
@@ -16,9 +19,17 @@ radius = 16.0
 [node name="player" type="KinematicBody2D"]
 collision_mask = 18
 script = ExtResource( 2 )
-__meta__ = {
-"_edit_group_": true
-}
+
+[node name="player_side_hit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_side_hit"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 0, 1 )
+shape = SubResource( 3 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = -10.0
@@ -57,4 +68,5 @@ volume_db = -18.159
 [node name="player_dead_timeout" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="body_entered" from="player_side_hit" to="." method="_on_player_side_hit_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
