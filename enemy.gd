@@ -35,7 +35,7 @@ func _physics_process(delta):
 	
 	velocity.x = speed * direction
 	velocity = move_and_slide(velocity, Vector2.UP)
-	$Label.text = String(heath)
+	#$Label.text = String(heath)
 	if heath < 0:
 		pass
 		#emit_signal("enemy_kill_number")
@@ -63,6 +63,9 @@ func _physics_process(delta):
 		var f = bullet.instance()
 		.add_child(f)
 		
+	#set the progressbar to the heath
+	$ProgressBar.value = heath
+		
 		
 		
 
@@ -81,6 +84,8 @@ func _on_side_checker_body_entered(body):
 	#yield(get_tree().create_timer(2), "timeout") #wait for a sec
 	#print("timer works")
 	heath = heath -10
+	
+	
 	if heath < 1:
 		dead() #call a func
 
