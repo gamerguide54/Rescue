@@ -21,6 +21,8 @@ const bullet = preload("res://bullet.tscn")
 
 func _physics_process(delta):
 	
+	$ProgressBar2.value = heath
+	
 		
 
 	match state:
@@ -148,7 +150,6 @@ func _on_fallzone_body_entered(body):
 #add one to the coins var
 #func add_coin():
 #	coins = coins + 1
-	#print out info to the commline
 #	print(coins)
 	
 	
@@ -166,6 +167,7 @@ func _on_Timer_timeout():
 
 func _on_life_body_entered(body):
 	heath = heath +15
+
 
 
 
