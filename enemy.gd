@@ -4,14 +4,10 @@ export var speed = 50
 export var direction = 1
 export var detects_cliffs = true
 var heath = 100
-#test
-var see = false
 
-signal enemy_kill_number
 
-#test code
+signal enemy_kill_number                                     #make a singnal
 const bullet = preload("res://enemy_bullet.tscn"   )
-
 onready var ray_cast_2d: RayCast2D = $player_checker
 
 
@@ -20,14 +16,11 @@ func _ready():
 		$AnimatedSprite.flip_h = false
 	$flooer_checker.position.x = $CollisionShape2D.shape.get_extents().x * direction
 	$flooer_checker.enabled = detects_cliffs
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
 func _physics_process(delta):
 	velocity.y += 20
 	if is_on_wall() or not $flooer_checker.is_colliding() and detects_cliffs and is_on_floor():
@@ -49,20 +42,18 @@ func _physics_process(delta):
 	#switch the area2D  position
 	if direction == -1:
 		$Area2D/CollisionShape2D.position.x = -215
-		#$player_checker.rotation_degrees = 90
+		#$player_checker.rotation_degrees = 90     #not needed
 		
 	elif direction == 1:
 		$Area2D/CollisionShape2D.position.x = 215
-		#$player_checker.rotation_degrees = -90 
+		#$player_checker.rotation_degrees = -90    #not needed
 
 
-	#test codes	
-	if ray_cast_2d.is_colliding() == false:
+	#not needed
+	if ray_cast_2d.is_colliding() == false:        
 		pass
-	elif ray_cast_2d.is_colliding() == true:
+	elif ray_cast_2d.is_colliding() == true:     
 		pass
-
-
 
 
 	#set the progressbar to the heath
@@ -75,13 +66,8 @@ func _physics_process(delta):
 
 
 
-
-
-
 func _on_side_checker_body_entered(body):
 	body.hit_side(position.x)   #spend to player with position
-	#yield(get_tree().create_timer(2), "timeout") #wait for a sec
-	#print("timer works")
 	heath = heath -10
 	
 	
@@ -90,7 +76,7 @@ func _on_side_checker_body_entered(body):
 
 
 func _on_top_checher_body_entered(body):
-	emit_signal("enemy_kill_number")
+	emit_signal("enemy_kill_number")   #send to HUD
 	$AnimatedSprite.play("dead")
 	speed = 0
 	set_collision_layer_bit(4, false)
@@ -102,13 +88,16 @@ func _on_top_checher_body_entered(body):
 	$Timer0.start()
 	body.bounce()     #spend to player
 
+
+
 #func
 func dead():
 	print("enemy dead")
 	emit_signal("enemy_kill_number")
 	queue_free()
 
-	
+
+
 func _on_Timer0_timeout():
 	queue_free()
 

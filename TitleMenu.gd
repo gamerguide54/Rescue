@@ -2,6 +2,7 @@ extends Control
 func _ready():
 	pass
 
+
 func _physics_process(delta):
 	if Input.is_action_just_pressed("restartlevel"):
 		get_tree().change_scene("res://World.tscn")
@@ -20,11 +21,8 @@ func _on_exit_pressed():
 
 
 
-
-
 func _on_playbutton_mouse_entered():
 	$UI_Hover.play()
-
 
 
 func _on_exit_mouse_entered():

@@ -18,6 +18,7 @@ const bullet = preload("res://bullet.tscn")
 
 
 
+
 func _physics_process(delta):
 	
 		
@@ -83,7 +84,6 @@ func _physics_process(delta):
 				state = States.AIR
 				
 			move_and_fall()
-			#print($gun/gunpos.position)
 			$Label.text = String(heath)
 			#when the player life gets to to 0
 			if heath == 80:
@@ -96,7 +96,7 @@ func _physics_process(delta):
 			elif heath > 90:
 				pass
 				#print("hight")
-			
+
 
 
 #move and fall
@@ -107,7 +107,7 @@ func move_and_fall():
 
 
 
-#revice from enemy with position
+#revice from enemy 
 func bounce():
 	print("bounce")
 	velocity.y = -jump * 0.7
@@ -121,7 +121,7 @@ func bounce():
 
 
 
-
+#revice from enemy with position
 func hit_side(var enemypos):
 	heath = heath -80
 	if position.x < enemypos:
@@ -134,6 +134,8 @@ func hit_side(var enemypos):
 	hurt = 20
 	$Timer.start()
 	print("side hit")
+
+
 
 
 func _on_fallzone_body_entered(body):
@@ -168,10 +170,9 @@ func _on_life_body_entered(body):
 
 
 
-	
-
 
 func _on_player_side_hit_body_entered(body):
 	print("enter")
-	#body.enemybullethit()
+
+
 

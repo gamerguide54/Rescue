@@ -1,6 +1,4 @@
 extends CanvasLayer
-
-
 var coins = 0
 var kills = 0
 export var time = 70
@@ -12,13 +10,14 @@ func _ready():
 	$time.text = String(time)
 
 
+#from the coin
 func _on_coin_collected():
 	$soungs.play()
 	coins = coins + 1
 	_ready()
 	
 
-
+#from enemy
 func _on_enemy_kill_number():
 	kills = kills + 1
 	_ready()
@@ -38,4 +37,5 @@ func _physics_process(delta):
 
 
 func _on_stop_pressed():
-	get_tree().change_scene("res://TitleMenu.tscn")
+	get_tree().change_scene("res://World.tscn")
+	#get_tree().change_scene("res://TitleMenu.tscn")
