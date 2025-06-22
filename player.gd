@@ -146,10 +146,10 @@ func _on_fallzone_body_entered(body):
 
 #old code dont kmow if this needed
 #add one to the coins var
-func add_coin():
-	coins = coins + 1
+#func add_coin():
+#	coins = coins + 1
 	#print out info to the commline
-	print(coins)
+#	print(coins)
 	
 	
 
@@ -165,14 +165,18 @@ func _on_Timer_timeout():
 
 
 func _on_life_body_entered(body):
-	heath = heath +20
+	heath = heath +15
 
 
 
 
-
+#when enemy bullet hit player
 func _on_player_side_hit_body_entered(body):
 	print("enter")
+	heath = heath -30
+	set_modulate(Color(10,10,10,0.9))
+	hurt = 20
+	$Timer.start()
 
 
 
