@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://tileset_one_way.tres" type="TileSet" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://opjects/Spikes.png" type="Texture" id=17]
 [ext_resource path="res://Scripts/side hit.gd" type="Script" id=18]
 [ext_resource path="res://Assets/soungs/confirmation_002.ogg" type="AudioStream" id=19]
+[ext_resource path="res://scn/enemy_2.tscn" type="PackedScene" id=20]
 
 [sub_resource type="SegmentShape2D" id=22]
 b = Vector2( 0, 52 )
@@ -559,6 +560,12 @@ autostart = true
 
 [node name="Air_hit_box" parent="." instance=ExtResource( 13 )]
 position = Vector2( 7174, 33.0001 )
+
+[node name="enemy_2" parent="." instance=ExtResource( 20 )]
+position = Vector2( 4117, 470 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [connection signal="time" from="." to="HUD" method="_on_World_time"]
 [connection signal="body_entered" from="moving/side hit art" to="moving/side hit" method="player_entered"]
